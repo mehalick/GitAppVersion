@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using GitAppVersion.Web.Configuration;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +23,11 @@ namespace GitAppVersion.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // framework services
             services.AddMvc();
+
+            // application services
+            services.AddSingleton<IAppVersionService, AppVersionService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
