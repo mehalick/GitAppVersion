@@ -1,19 +1,16 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace GitAppVersion.Web.Configuration
 {
     public class AppVersionService : IAppVersionService
     {
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly ILogger _logger;
 
-        public AppVersionService(IHostingEnvironment hostingEnvironment, ILogger<AppVersionService> logger)
+        public AppVersionService(IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
-            _logger = logger;
         }
 
         private AppVersion _appVersion;
@@ -27,9 +24,6 @@ namespace GitAppVersion.Web.Configuration
                 }
 
                 var path = Path.Combine(_hostingEnvironment.WebRootPath, "version.json");
-
-                _logger.LogInformation(path);
-
                 if (path == null || !File.Exists(path))
                 {
                     _appVersion = new AppVersion();
