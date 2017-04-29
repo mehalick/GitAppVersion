@@ -23,7 +23,7 @@ namespace GitAppVersion.Web.Configuration
                     return _appVersion;
                 }
 
-                var path = Path.Combine(_hostingEnvironment.WebRootPath, "~/version.json");
+                var path = Path.Combine(_hostingEnvironment.WebRootPath, "version.json");
                 if (path == null || !File.Exists(path))
                 {
                     _appVersion = new AppVersion();
