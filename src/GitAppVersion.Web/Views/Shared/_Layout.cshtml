@@ -1,25 +1,30 @@
 ﻿@inject IAppVersionService AppVersionService
+@{
+    var shortHash = AppVersionService.AppVersion.ShortHash;
+    var deployment = AppVersionService.AppVersion.DeploymentUtc.ToString("u");
+}
 <!DOCTYPE html>
-<html data-version-short-hash="@AppVersionService.AppVersion.ShortHash" data-version-deploy-utc="@AppVersionService.AppVersion.DeployUtc.ToString("u")">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="version:shorthash" content="@AppVersionService.AppVersion.ShortHash" />
-    <meta name="version:deployutc" content="@AppVersionService.AppVersion.DeployUtc.ToString("u")" />
+    <meta name="application-name" content="GitAppVersionDemo" data-version="@shortHash" data-deployment="@deployment" />
+    <meta name="version:ShortHash" content="@shortHash" />
+    <meta name="version:Deployment" content="@deployment" />
     <script id="version" type="application/json">
         { 
-            "ShortHash": "@AppVersionService.AppVersion.ShortHash",
-            "DeployUtc": "@AppVersionService.AppVersion.DeployUtc.ToString("u")"
+            "ShortHash": "@shortHash",
+            "Deployment": "@deployment"
         }
     </script>
-    <title>@ViewData["Title"] - GitAppVersion.Web</title>
+    <title>Git App Version Demo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 </head>
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Git App Version Demo</a>
+                <a href="/" class="navbar-brand">Git App Version Demo</a>
             </div>
         </div>
     </nav>
@@ -27,9 +32,11 @@
         @RenderBody()
         <hr />
         <footer class="text-center" itemscope itemtype="http://schema.org/SoftwareApplication">
-            &copy; Git App Version Demo | 
-            Version: <span itemprop="softwareVersion">@AppVersionService.AppVersion.ShortHash</span> 
-            <time itemprop="startDate" datetime="@AppVersionService.AppVersion.DeployUtc.ToString("u")">@AppVersionService.AppVersion.DeployUtc.ToString("yyyy-MM")</time>
+            &copy; 
+            <span itemprop="copyrightYear">2017</span>
+            <span itemprop="copyrightHolder">Andy Mehalick</span> | 
+            Version: <span itemprop="softwareVersion">@shortHash</span> 
+            <time itemprop="dateModified" datetime="@deployment">@AppVersionService.AppVersion.DeploymentUtc.ToString("yyyy-MM")</time>
         </footer>
     </div>
 </body>
