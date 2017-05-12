@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="application-name" content="GitAppVersionDemo" data-version="@shortHash" data-deployment="@deployment" />
+    <meta name="application-name" content="MyApp" data-version="@shortHash" data-deployment="@deployment" />
     <meta name="version:ShortHash" content="@shortHash" />
     <meta name="version:Deployment" content="@deployment" />
     <script id="version" type="application/json">
@@ -19,25 +19,48 @@
     </script>
     <title>Git App Version Demo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
+    <style>
+        body {
+            font-family: Roboto, sans-serif;
+        }
+        nav.navbar-inverse {
+            background-color: #1A237E;
+            border: none;
+            border-radius: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,.26);
+        }
+        nav.navbar-inverse .navbar-brand {
+            color: #ffffff;
+        }
+        main {
+            padding: 100px 0;
+        }
+        footer {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="/" class="navbar-brand">Git App Version Demo</a>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand">Git App Version Demo</a>
+                </div>
             </div>
-        </div>
-    </nav>
-    <div class="container body-content">
+        </nav>
+    </header>
+    <main class="container">
         @RenderBody()
+    </main> 
+    <footer class="container" itemscope itemtype="http://schema.org/SoftwareApplication">
         <hr />
-        <footer class="text-center" itemscope itemtype="http://schema.org/SoftwareApplication">
-            &copy; 
-            <span itemprop="copyrightYear">2017</span>
-            <span itemprop="copyrightHolder">Andy Mehalick</span> | 
-            Version: <span itemprop="softwareVersion">@shortHash</span> 
-            <time itemprop="dateModified" datetime="@deployment">@AppVersionService.AppVersion.DeploymentUtc.ToString("yyyy-MM")</time>
-        </footer>
-    </div>
+        &copy;
+        <span itemprop="copyrightYear">2017</span>
+        <span itemprop="copyrightHolder">Andy Mehalick</span> |
+        Version: <span itemprop="softwareVersion">@shortHash</span>
+        <time itemprop="dateModified" datetime="@deployment">@AppVersionService.AppVersion.DeploymentUtc.ToString("yyyy-MM")</time>
+    </footer>
 </body>
 </html>
